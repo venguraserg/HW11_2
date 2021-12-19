@@ -50,7 +50,7 @@ namespace HW11.BL.Controller
                 {
                     index = Users.IndexOf(user);
                     Users[index] =  (Manager)user;
-                }
+                } 
                 
                 
                 
