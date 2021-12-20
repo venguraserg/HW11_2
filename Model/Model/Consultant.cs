@@ -17,5 +17,16 @@ namespace HW11.BL.Model
             
         }
 
+
+
+        public override List<Client> GetAllClient(List<Client> clients)
+        {
+            for (int i = 0; i < clients.Count; i++)
+            {
+                if (clients[i].PassNumber != null) clients[i].PassNumber = "*************";
+            } 
+            return clients;
+        }
+
     }
 }

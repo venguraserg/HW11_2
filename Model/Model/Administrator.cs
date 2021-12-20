@@ -13,6 +13,7 @@ namespace HW11.BL.Model
     /// </summary>
     public class Administrator : User
     {
+       
         public Administrator() : base()
         {
             
@@ -28,5 +29,9 @@ namespace HW11.BL.Model
         {
 
         }
+
+
+        
+
     }
 }

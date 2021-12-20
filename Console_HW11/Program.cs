@@ -25,34 +25,54 @@ namespace Console_HW11
             }
             Console.Clear();
 
+            Console.WriteLine($"Здраствуйте {userController.CurentUser.Name} вы {userController.CurentUser.GetType().Name}");
+            switch (userController.CurentUser.GetType().Name)
+            {
+                case "Administrator":
+                    Console.WriteLine("Вы наделены лишь правом изменить статус сотрудника");
+                    Console.WriteLine("Консультант <-> Менеджер");
+                    Console.WriteLine("--------------------------------------------------------------------");
+                    Console.WriteLine("                         СПИСОК СОТРУДНИКОВ                         ");
+                    for(int i=0;i<userController.Users.Count;i++)
+                    {
+                        Console.WriteLine($"{i+1}.{userController.Users[i].Name}   {userController.Users[i].Status}");
+                    }
+                    Console.Write("Введите имя сотрудника: ");
+                    var nameUserChangeStatus = Console.ReadLine();
+                    if (userController.ChangeUserStatus(nameUserChangeStatus))
+                        Console.WriteLine("Данные изменены");
+                    else
+                        Console.WriteLine($"Пользователь с именем {nameUserChangeStatus} не найден");
+                    break;
 
-            if (userController.CurentUser.GetType() == typeof(Administrator)) MenuAdmin(ref userController);
-            
-            if (userController.CurentUser.GetType() == typeof(Consultant)) MenuConsult(ref userController);
-           
-            if (userController.CurentUser.GetType() == typeof(Manager)) MenuManager(ref userController);
-            
 
+                case "Consultant":
+                    var tempClient = userController.CurentUser.GetAllClient(clients);
+                    for (int i = 0; i < tempClient.Count; i++)
+                    {
+                        Console.WriteLine($"{i+1}. {tempClient[i].Name}  {tempClient[i].Surname}  {tempClient[i].Patronymic} {tempClient[i].PhoneNumber}  {tempClient[i].PassNumber}");
+                    }
+                    
+                    break;
+                case "Manager":
+                   tempClient = userController.CurentUser.GetAllClient(clients);
+                    for (int i = 0; i < tempClient.Count; i++)
+                    {
+                        Console.WriteLine($"{i + 1}. {tempClient[i].Name}  {tempClient[i].Surname}  {tempClient[i].Patronymic} {tempClient[i].PhoneNumber}  {tempClient[i].PassNumber}");
+                    }
+                    break;
 
+                default:
+                    break;
+            }
 
+            Console.WriteLine("Конец программы, нажмите любую клавишу...");
             Console.ReadKey();
 
         }
 
-        public static void MenuAdmin(ref UserController userController)
-        {
-            Console.WriteLine("Admin");
-            userController.CurentUser = (Administrator)userController.CurentUser;
-            userController.ChangeUserToManager("Serg");
-        }
-        public static void MenuConsult(ref UserController userController)
-        {
-            Console.WriteLine("Consult");
-        }
-        public static void MenuManager(ref UserController userController)
-        {
-            Console.WriteLine("Manager");
-        }
+       
+       
 
 
     }

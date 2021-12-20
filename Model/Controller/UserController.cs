@@ -40,26 +40,38 @@ namespace HW11.BL.Controller
             }
         }
 
-        public void ChangeUserToManager(string name)
+        /// <summary>
+        /// Метод смены типа консультанта на клиента
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public bool ChangeUserStatus(string name)
         {
             if(CurentUser is Administrator)
             {
                 int index;
-                User user = (User)Users.SingleOrDefault(u => u.Name == name);
+                User user = Users.SingleOrDefault(u => u.Name == name);
                 if (user != null)
                 {
                     index = Users.IndexOf(user);
-                    Users[index] =  (Manager)user;
-                } 
-                
-                
-                
 
-
-
-
-
+                    switch (user.Status)
+                    {
+                        case "consultant":
+                            Users[index] = new Manager(user.Id, user.Name, "manager");
+                            break;
+                        case "manager":
+                            Users[index] = new Consultant(user.Id, user.Name, "consultant");
+                            break;
+                        default:
+                            break;
+                    }
+                                        
+                    Save();
+                    return true;
+                }
             }
+            return false;
         }
         
 
@@ -83,7 +95,7 @@ namespace HW11.BL.Controller
             {
                 string json = File.ReadAllText(USER_FILE_NAME);
                 if(string.IsNullOrEmpty(json)) return new List<User>();
-                var users = JsonConvert.DeserializeObject<List<User>>(json);
+                var users = JsonConvert.DeserializeObject<List<UserDeserilize>>(json);
 
                 for(int i = 0; i < users.Count; i++)
                 {

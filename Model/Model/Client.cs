@@ -8,11 +8,11 @@ namespace HW11.BL.Model
 {
     public class Client
     {
-        private string Surname { get; }
-        private string Name { get;}
-        private string Patronymic { get; }
-        private string PhoneNumber { get; }
-        private string PassNumber { get; }
+        public string Surname { get; set; }
+        public string Name { get; set; }
+        public string Patronymic { get; set; }
+        public string PhoneNumber { get; set; }
+        public string PassNumber { get; set; }
 
 
         public Client(string surname, string name, string patronymic, string phoneNumber, string passNumber)
