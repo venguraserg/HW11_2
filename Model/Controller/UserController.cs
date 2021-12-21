@@ -11,7 +11,7 @@ namespace HW11.BL.Controller
 {
     public class UserController
     {
-        private static readonly string USER_FILE_NAME = "users.json";
+        private static readonly string USER_FILE_NAME = "users.json"; 
         /// <summary>
         /// Коллекция пользователей
         /// </summary>
