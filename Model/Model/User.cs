@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace HW11.BL.Model
 {
@@ -29,7 +30,7 @@ namespace HW11.BL.Model
         #endregion
 
         #region Методы
-        public virtual List<Client> GetAllClient(List<Client> clients)
+        public virtual ObservableCollection<Client> GetAllClient(ObservableCollection<Client> clients)
         {
             return clients;
         }

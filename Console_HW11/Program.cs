@@ -9,7 +9,7 @@ namespace Console_HW11
     {
         static void Main(string[] args)
         {
-            List<Client> clients = Client.AutoCompliteClient(10);
+            var clientController = new ClientController(100);
             Console.WriteLine("Вас приветствует инфосистема какого банка");
             Console.Write("Введите ваше имя:  ");
             var tempName = Console.ReadLine();
@@ -47,7 +47,7 @@ namespace Console_HW11
 
 
                 case "Consultant":
-                    var tempClient = userController.CurentUser.GetAllClient(clients);
+                    var tempClient = userController.CurentUser.GetAllClient(clientController.Clients);
                     for (int i = 0; i < tempClient.Count; i++)
                     {
                         Console.WriteLine($"{i+1}. {tempClient[i].Name}  {tempClient[i].Surname}  {tempClient[i].Patronymic} {tempClient[i].PhoneNumber}  {tempClient[i].PassNumber}");
@@ -55,7 +55,7 @@ namespace Console_HW11
                     
                     break;
                 case "Manager":
-                   tempClient = userController.CurentUser.GetAllClient(clients);
+                   tempClient = userController.CurentUser.GetAllClient(clientController.Clients);
                     for (int i = 0; i < tempClient.Count; i++)
                     {
                         Console.WriteLine($"{i + 1}. {tempClient[i].Name}  {tempClient[i].Surname}  {tempClient[i].Patronymic} {tempClient[i].PhoneNumber}  {tempClient[i].PassNumber}");
