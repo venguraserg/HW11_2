@@ -35,7 +35,7 @@ namespace HW11.BL.Model
             return clients;
         }
 
-       
+
 
 
 
@@ -43,7 +43,10 @@ namespace HW11.BL.Model
 
         #endregion
 
-
+        public override string ToString()
+        {
+            return $"{Name}";
+        }
 
 
 

@@ -7,6 +7,10 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <ListBox x:Name="LB" Margin="88"/>
+        <ComboBox x:Name="CB_User" HorizontalAlignment="Left" Margin="79,25,0,0" VerticalAlignment="Top" Width="120"/>
+
+
 
     </Grid>
 </Window>
