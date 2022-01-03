@@ -18,5 +18,10 @@ namespace HW11.BL.Model
         /// <param name="name"></param>
         /// <param name="status"></param>
         public UserDeserilize(Guid id, string name, string status) : base(id, name, status) { }
+
+        public override List<Client> GetAllClient(List<Client> clients)
+        {
+            return null;
+        }
     }
 }

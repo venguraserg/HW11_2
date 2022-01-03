@@ -1,9 +1,10 @@
-﻿using System;
+﻿using HW11.BL.Interfaces;
+using System;
 using System.Collections.Generic;
 
 namespace HW11.BL.Model
 {
-    public abstract class User
+    public abstract class User : IWorkWithClient
     {
         public Guid Id { get; }
         public string Name { get; set; }
@@ -29,12 +30,11 @@ namespace HW11.BL.Model
         #endregion
 
         #region Методы
-        public virtual List<Client> GetAllClient(List<Client> clients)
-        {
-            return clients;
-        }
+        public abstract List<Client> GetAllClient(List<Client> clients);
+        //public abstract Client UpdateClient();
 
-       
+
+
 
 
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HW11.BL.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,5 +29,9 @@ namespace HW11.BL.Model
             return clients;
         }
 
+        //public override Client UpdateClient(string f)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

@@ -1,16 +1,18 @@
-﻿using HW11.BL.Model;
+﻿using HW11.BL.Interfaces;
+using HW11.BL.Model;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HW11.BL.Controller
 {
-    public class UserController
+    /// <summary>
+    /// Класс котроллера пользователя
+    /// </summary>
+    public class UserController : BaseController , IWorkWithClient
     {
+
         private static readonly string USER_FILE_NAME = "users.json";
         /// <summary>
         /// Коллекция пользователей
@@ -20,7 +22,12 @@ namespace HW11.BL.Controller
         /// Текущий пользователь
         /// </summary>
         public User CurentUser { get; set; }
+        /// <summary>
+        /// Новый ли пользователь?
+        /// </summary>
         public bool IsNewUser { get; } = false;
+
+        
 
         /// <summary>
         /// Конструктор
@@ -28,17 +35,20 @@ namespace HW11.BL.Controller
         /// <param name="userName">имя пользователя</param>
         public UserController(string userName)
         {
-            this.Users = GetUserData();
+            this.Users = Load();
 
             CurentUser = Users.SingleOrDefault(u => u.Name == userName);
             if(CurentUser == null)
             {
                 CurentUser = new Consultant(userName);
-                Users.Add(CurentUser);
+                Users.Add((User)CurentUser);
                 IsNewUser = true;
                 Save();
             }
+            
         }
+
+        
 
         /// <summary>
         /// Метод смены типа консультанта на клиента
@@ -80,44 +90,30 @@ namespace HW11.BL.Controller
         /// Получение списка всех пользователей
         /// </summary>
         /// <returns></returns>
-        private List<User> GetUserData()
+        private List<User> Load()
         {
-            List<User> tempUsers = new List<User>();
+           List<User> tempUsers = Load<User, UserDeserilize>(USER_FILE_NAME);
 
-            if (File.Exists(USER_FILE_NAME) == false)
-            {
-                using (File.Create(USER_FILE_NAME)) { };
-                List<User> tempUserList = new();
-                tempUserList.Add(new Administrator());
-                return tempUserList;
-            }
-            else
-            {
-                string json = File.ReadAllText(USER_FILE_NAME);
-                if(string.IsNullOrEmpty(json)) return new List<User>();
-                var users = JsonConvert.DeserializeObject<List<UserDeserilize>>(json);
 
-                for(int i = 0; i < users.Count; i++)
+            for (int i = 0; i < tempUsers.Count; i++)
+            {
+                switch (tempUsers[i].Status)
                 {
-                    switch (users[i].Status)
-                    {
-                        case "consultant":
-                            tempUsers.Add(new Consultant(users[i].Id, users[i].Name, users[i].Status));
-                            break;
-                        case "manager":
-                            tempUsers.Add(new Manager(users[i].Id, users[i].Name, users[i].Status));
-                            break;
-                        case "admin":
-                            tempUsers.Add(new Administrator(users[i].Id, users[i].Name, users[i].Status));
-                            break;
-                        default:                            
-                            break;
-                    }
+                    case "consultant":
+                        tempUsers.Add(new Consultant(tempUsers[i].Id, tempUsers[i].Name, tempUsers[i].Status));
+                        break;
+                    case "manager":
+                        tempUsers.Add(new Manager(tempUsers[i].Id, tempUsers[i].Name, tempUsers[i].Status));
+                        break;
+                    case "admin":
+                        tempUsers.Add(new Administrator(tempUsers[i].Id, tempUsers[i].Name, tempUsers[i].Status));
+                        break;
+                    default:                            
+                        break;
                 }
-
-
-                return tempUsers;
             }
+            return tempUsers;
+
         }
 
         /// <summary>
@@ -125,18 +121,17 @@ namespace HW11.BL.Controller
         /// </summary>
         private void Save()
         {
-            if (File.Exists(USER_FILE_NAME) == false)
-            {
-                using (File.Create(USER_FILE_NAME)) { };                
-            }
-
-            string json = JsonConvert.SerializeObject(Users);
-            File.WriteAllText(USER_FILE_NAME, json);
-
+            base.Save<User>(USER_FILE_NAME, Users);
         }
 
-        
+        public List<Client> GetAllClient(List<Client> clients)
+        {
+            return CurentUser.GetAllClient(clients);
+        }
 
-
+        public Client UpdateClient()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
