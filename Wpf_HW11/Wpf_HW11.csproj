@@ -6,4 +6,8 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Model\HW11.BL.csproj" />
+  </ItemGroup>
+
 </Project>

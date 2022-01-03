@@ -1,6 +1,7 @@
 ﻿using HW11.BL.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace HW11.BL.Model
 {
@@ -42,7 +43,10 @@ namespace HW11.BL.Model
 
         #endregion
 
-
+        public override string ToString()
+        {
+            return $"{Name}";
+        }
 
 
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HW11.BL.Controller;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,18 @@ namespace Wpf_HW11
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        UserController userController = new UserController("Solovey");
         public MainWindow()
         {
             InitializeComponent();
+            LB.ItemsSource = userController.Users;
+            CB_User.ItemsSource = userController.Users;
         }
+
+        
+
+
+        
     }
 }
