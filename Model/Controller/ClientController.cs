@@ -14,7 +14,7 @@ namespace HW11.BL.Controller
     {
         private static readonly string USER_FILE_NAME = "clients.json"; 
 
-        public ObservableCollection<Client> Clients { get; set; }
+        public List<Client> Clients { get; set; }
 
         /// <summary>
         /// Конструктор с автозаполнением
@@ -22,7 +22,7 @@ namespace HW11.BL.Controller
         /// <param name="number"></param>
         public ClientController(int number)
         {
-            Clients = new ObservableCollection<Client>();
+            Clients = new List<Client>();
             for (int i = 0; i < number; i++)
             {
                 string tempGuid = Guid.NewGuid().ToString();

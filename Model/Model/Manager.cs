@@ -19,7 +19,7 @@ namespace HW11.BL.Model
         {
 
         }
-        public override ObservableCollection<Client> GetAllClient(ObservableCollection<Client> clients)
+        public override List<Client> GetAllClient(List<Client> clients)
         {
             //for (int i = 0; i < clients.Count; i++)
             //{

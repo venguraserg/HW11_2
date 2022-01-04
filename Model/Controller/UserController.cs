@@ -92,21 +92,23 @@ namespace HW11.BL.Controller
         /// <returns></returns>
         private List<User> Load()
         {
-           List<User> tempUsers = Load<User, UserDeserilize>(USER_FILE_NAME);
+            List<User> tempUsers = new List<User>();
+            var loadData = Load<UserDeserilize>(USER_FILE_NAME);
 
+            if (loadData.Count < 1) { tempUsers.Add(new Administrator()); }
 
-            for (int i = 0; i < tempUsers.Count; i++)
+            for (int i = 0; i < loadData.Count; i++)
             {
-                switch (tempUsers[i].Status)
+                switch (loadData[i].Status)
                 {
                     case "consultant":
-                        tempUsers.Add(new Consultant(tempUsers[i].Id, tempUsers[i].Name, tempUsers[i].Status));
+                        tempUsers.Add(new Consultant(loadData[i].Id, loadData[i].Name, loadData[i].Status));
                         break;
                     case "manager":
-                        tempUsers.Add(new Manager(tempUsers[i].Id, tempUsers[i].Name, tempUsers[i].Status));
+                        tempUsers.Add(new Manager(loadData[i].Id, loadData[i].Name, loadData[i].Status));
                         break;
                     case "admin":
-                        tempUsers.Add(new Administrator(tempUsers[i].Id, tempUsers[i].Name, tempUsers[i].Status));
+                        tempUsers.Add(new Administrator(loadData[i].Id, loadData[i].Name, loadData[i].Status));
                         break;
                     default:                            
                         break;

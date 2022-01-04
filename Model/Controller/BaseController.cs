@@ -29,7 +29,7 @@ namespace HW11.BL.Controller
         /// Получение списка всех пользователей
         /// </summary>
         /// <returns></returns>
-        public List<T> Load<T,K>(string fileName) where T : class, K
+        public List<T> Load<T>(string fileName) where T : class
         {
             List<T> tempItems = new List<T>();
 
@@ -46,9 +46,9 @@ namespace HW11.BL.Controller
 
                 //var q = Type.GetType(typeDeserialize);
                 
-                var items = JsonConvert.DeserializeObject<List<K>> (json);
+                var items = JsonConvert.DeserializeObject<List<T>> (json);
 
-                return items as T;
+                return items;
             }
         }
 

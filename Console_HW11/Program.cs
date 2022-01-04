@@ -10,7 +10,7 @@ namespace Console_HW11
         static void Main(string[] args)
         {
             //Создание списка клиентов методом автоматической генерации для тестирования
-            List<Client> clients = Client.AutoCompliteClient(10);
+            var clientController = new ClientController(50);
 
             //Ввод имени пользователя
             //пароль применять не стал изза соображений скорости
@@ -69,7 +69,7 @@ namespace Console_HW11
                 //    break;
 
                 default:
-                    PrintUsers(userController.GetAllClient(clients));
+                    PrintUsers(userController.GetAllClient(clientController.Clients));
                     break;
             }
 
