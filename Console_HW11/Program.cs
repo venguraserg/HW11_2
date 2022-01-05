@@ -84,9 +84,10 @@ namespace Console_HW11
         /// <param name="tempClient"></param>
         private static void PrintUsers(List<Client> tempClient)
         {
+            Console.WriteLine("№п/п Имя   Фамилия   Отч. №тел   №паспорта");
             for (int i = 0; i < tempClient.Count; i++)
             {
-                Console.WriteLine($"{i + 1}. {tempClient[i].Name}  {tempClient[i].Surname}  {tempClient[i].Patronymic} {tempClient[i].PhoneNumber}  {tempClient[i].PassNumber}");
+                Console.WriteLine($"  {i + 1}. {tempClient[i].Name}  {tempClient[i].Surname}  {tempClient[i].Patronymic} {tempClient[i].PhoneNumber}  {tempClient[i].PassNumber}");
             }
         }
 
