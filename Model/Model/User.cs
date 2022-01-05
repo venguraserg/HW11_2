@@ -32,7 +32,7 @@ namespace HW11.BL.Model
 
         #region Методы
         public abstract List<Client> GetAllClient(List<Client> clients);
-        //public abstract Client UpdateClient();
+        public abstract Client UpdateClient(Client client);
 
 
 

@@ -23,5 +23,10 @@ namespace HW11.BL.Model
         {
             return null;
         }
+
+        public override Client UpdateClient(Client client)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

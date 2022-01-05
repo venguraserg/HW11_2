@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace HW11.BL.Controller
 {
-    public class ClientController
+    public class ClientController : BaseController
     {
-        private static readonly string USER_FILE_NAME = "clients.json"; 
+        private static readonly string CLIENT_FILE_NAME = "clients.json"; 
 
         public List<Client> Clients { get; set; }
 
@@ -34,18 +34,29 @@ namespace HW11.BL.Controller
         }
 
         /// <summary>
-        /// Серилизация пользователей в json файл
+        /// Конструктор с загрузкой клиентов из файла
+        /// </summary>
+        public ClientController()
+        {
+            this.Clients = Load();
+
+        }
+
+        /// <summary>
+        /// Серилизация клиентов в json файл
         /// </summary>
         private void Save()
         {
-            if (File.Exists(USER_FILE_NAME) == false)
-            {
-                using (File.Create(USER_FILE_NAME)) { };
-            }
+            base.Save<Client>(CLIENT_FILE_NAME, Clients);          
+        }
 
-            string json = JsonConvert.SerializeObject(Clients);
-            File.WriteAllText(USER_FILE_NAME, json);
-
+        /// <summary>
+        /// Десерилизация клиентов
+        /// </summary>
+        /// <returns></returns>
+        private List<Client> Load()
+        {            
+            return Load<Client>(CLIENT_FILE_NAME);
         }
 
 

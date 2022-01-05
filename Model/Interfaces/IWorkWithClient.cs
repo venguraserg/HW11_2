@@ -12,7 +12,7 @@ namespace HW11.BL.Interfaces
 
         List<Client> GetAllClient(List<Client> clients);
 
-        //Client UpdateClient();
+        Client UpdateClient(Client client);
 
     }
 }

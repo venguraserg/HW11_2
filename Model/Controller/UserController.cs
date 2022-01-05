@@ -10,7 +10,7 @@ namespace HW11.BL.Controller
     /// <summary>
     /// Класс котроллера пользователя
     /// </summary>
-    public class UserController : BaseController , IWorkWithClient
+    public class UserController : BaseController 
     {
 
         private static readonly string USER_FILE_NAME = "users.json";
