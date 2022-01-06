@@ -79,6 +79,7 @@ namespace Console_HW11
                 else
                 {
                     Console.WriteLine("V - просмотр клиентов");
+                    Console.WriteLine("C - редактировать клиента");
                     Console.WriteLine("N - смена пользователя");
                     Console.WriteLine("Q - выход из приложения");
 
@@ -92,8 +93,13 @@ namespace Console_HW11
                             break;
 
                         case ConsoleKey.C:
-                            //метод изменения данных клиента
-
+                            // изменения данных клиента
+                            PrintUsers(userController.GetAllClient(clientController.Clients));
+                            Console.WriteLine("--------------------------------------------------------------------");
+                            Console.WriteLine("Введите номер клиента");
+                            var clientNumber = int.Parse(Console.ReadLine());
+                            var currentClient = clientController.GetClient(clientNumber);
+                            /////////////////////////////////////////////////////
                             break;
 
                         case ConsoleKey.N:

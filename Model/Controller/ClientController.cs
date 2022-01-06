@@ -43,6 +43,19 @@ namespace HW11.BL.Controller
         }
 
         /// <summary>
+        /// Получение клиента по индексу
+        /// </summary>
+        /// <param name="number"></param>
+        /// <returns></returns>
+        public Client GetClient(int number)
+        {            
+            return this.Clients[number - 1];
+        }
+
+
+
+
+        /// <summary>
         /// Серилизация клиентов в json файл
         /// </summary>
         private void Save()
