@@ -36,16 +36,11 @@ namespace HW11.BL.Model
 
 
 
-
-
-
-
-
         #endregion
 
         public override string ToString()
         {
-            return $"{Name}";
+            return $"{Name}  {Status}";
         }
 
 

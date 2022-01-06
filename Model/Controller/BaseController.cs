@@ -36,7 +36,7 @@ namespace HW11.BL.Controller
             if (File.Exists(fileName) == false)
             {
                 using (File.Create(fileName)) { };
-                List<T> tempItemList = new();                
+                List<T> tempItemList = new();
                 return tempItemList;
             }
             else
@@ -44,7 +44,7 @@ namespace HW11.BL.Controller
                 string json = File.ReadAllText(fileName);
                 if (string.IsNullOrEmpty(json)) return new List<T>();
 
-                //var q = Type.GetType(typeDeserialize);
+                
                 
                 var items = JsonConvert.DeserializeObject<List<T>> (json);
 

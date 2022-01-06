@@ -99,7 +99,15 @@ namespace Console_HW11
                             Console.WriteLine("Введите номер клиента");
                             var clientNumber = int.Parse(Console.ReadLine());
                             var currentClient = clientController.GetClient(clientNumber);
-                            /////////////////////////////////////////////////////
+                            if(userController.CurentUser is Consultant)
+                            {
+
+                            }
+                            else
+                            {
+
+                            }
+                            
                             break;
 
                         case ConsoleKey.N:

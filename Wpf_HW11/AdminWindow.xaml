@@ -1,0 +1,24 @@
+﻿<Window x:Class="Wpf_HW11.AdminWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Wpf_HW11"
+        mc:Ignorable="d"
+        Title="AdminWindow" Height="450" Width="400" ResizeMode="NoResize">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" ></ColumnDefinition>
+            <ColumnDefinition ></ColumnDefinition>
+            <ColumnDefinition ></ColumnDefinition>
+            <ColumnDefinition ></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="60"></RowDefinition>
+        </Grid.RowDefinitions>
+        <ListBox x:Name="ListBox_Users" Grid.Row="0" Margin="15" Grid.ColumnSpan="4" SelectionChanged="ListBox_Users_SelectionChanged"/>
+        <Button x:Name="BTN_Change" Grid.Column="2" Grid.Row="1" Margin="10,15" Content="Изменить" Click="BTN_Change_Click"/>
+        <Button x:Name="BTN_Exit" Grid.Column="3" Grid.Row="1" Margin="10,15" Content="Авторизация" Click="BTN_Exit_Click"/>
+    </Grid>
+</Window>
