@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Wpf_HW11"
         mc:Ignorable="d"
-        Title="AdminWindow" Height="450" Width="400" ResizeMode="NoResize">
+        Title="AdminWindow" Height="450" Width="400" ResizeMode="NoResize" WindowStyle="SingleBorderWindow">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" ></ColumnDefinition>
@@ -14,11 +14,28 @@
             <ColumnDefinition ></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="60"></RowDefinition>
+            <RowDefinition Height="45*"></RowDefinition>            
+            <RowDefinition Height="45*"></RowDefinition>
+            <RowDefinition Height="10*"></RowDefinition>
+            
         </Grid.RowDefinitions>
-        <ListBox x:Name="ListBox_Users" Grid.Row="0" Margin="15" Grid.ColumnSpan="4" SelectionChanged="ListBox_Users_SelectionChanged"/>
-        <Button x:Name="BTN_Change" Grid.Column="2" Grid.Row="1" Margin="10,15" Content="Изменить" Click="BTN_Change_Click"/>
-        <Button x:Name="BTN_Exit" Grid.Column="3" Grid.Row="1" Margin="10,15" Content="Авторизация" Click="BTN_Exit_Click"/>
+        <ListBox x:Name="ListBox_Users" Grid.Row="0" Margin="10" Grid.ColumnSpan="4" SelectionChanged="ListBox_Users_SelectionChanged" />
+        <ListView x:Name="ListView_Users" Grid.Row="1" Margin="10" Grid.ColumnSpan="4" SelectionChanged="ListView_Users_SelectionChanged" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <WrapPanel>
+                        <TextBlock Text="Имя: " />
+                        <TextBlock Text="{Binding Name}" FontWeight="Bold" />
+                        <TextBlock Text=",    " />
+                        <TextBlock Text="Статус: " />
+                        <TextBlock Text="{Binding Status}" FontWeight="Bold" />
+                        
+                    </WrapPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        
+        <Button x:Name="BTN_Change" Grid.Column="2" Grid.Row="2" Margin="10,10" Content="Изменить" Click="BTN_Change_Click"/>
+        <Button x:Name="BTN_Exit" Grid.Column="3" Grid.Row="2" Margin="10,10" Content="Авторизация" Click="BTN_Exit_Click"/>
     </Grid>
 </Window>

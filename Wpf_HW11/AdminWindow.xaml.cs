@@ -1,4 +1,5 @@
 ﻿using HW11.BL.Controller;
+using HW11.BL.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,17 +22,20 @@ namespace Wpf_HW11
     public partial class AdminWindow : Window
     {
         private UserController userController;
+        private string tempName;
         public AdminWindow(UserController userController)
         {
             InitializeComponent();
             this.userController = userController;
             this.Title = $"{userController.CurentUser.Name} - {userController.CurentUser.Status}";
-            ListBox_Users.ItemsSource = userController.Users;
+            ListView_Users.ItemsSource = userController.Users;
         }
 
         private void BTN_Change_Click(object sender, RoutedEventArgs e)
         {
-
+            userController.ChangeUserStatus(tempName);
+            
+            //ListView_Users.Items.Refresh();
         }
 
         private void BTN_Exit_Click(object sender, RoutedEventArgs e)
@@ -42,9 +46,19 @@ namespace Wpf_HW11
         }
 
         
+       
+        private void ListView_Users_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ListView_Users.Items.Refresh();
+            this.Title = ListView_Users.SelectedItem.ToString();
+            var item = ListView_Users.SelectedItem as User;
+            this.tempName = item.Name;
+            
+        }
+
         private void ListBox_Users_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            this.Title = ListBox_Users.SelectedItem.ToString();
+
         }
     }
 }
