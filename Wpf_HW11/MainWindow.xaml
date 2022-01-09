@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Wpf_HW11"
         mc:Ignorable="d"
-        Title="Клиенты" Height="450" Width="800">
+        Title="Клиенты" Height="600" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -20,9 +20,12 @@
             <RowDefinition Height="70*"/>
             <RowDefinition Height="7*"/>
             <RowDefinition Height="7*"/>
-            <RowDefinition Height="10*"/>
+            <RowDefinition Height="7*"/>
+            <RowDefinition Height="7*"/>
+            <RowDefinition Height="7*"/>
+            
         </Grid.RowDefinitions>
-
+        
         <TextBlock x:Name="TB_User" Margin="1" 
                    Grid.Row="0" Grid.Column="5" 
                    HorizontalAlignment="Left"/>
@@ -30,9 +33,9 @@
                    Margin="1" Grid.Row="1" 
                    Grid.Column="5" 
                    HorizontalAlignment="Left"/>
-        <ListView x:Name="ListView_Clints" 
+        <ListView x:Name="ListView_Clients" 
                   Grid.Row="2" Margin="10" 
-                  Grid.ColumnSpan="5"  >
+                  Grid.ColumnSpan="5"  SelectionChanged="ListView_Clients_SelectionChanged_1"  >
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Фамилия" 
@@ -50,18 +53,20 @@
             
         </ListView>
         <TextBlock Grid.Row ="3" Grid.Column="0" Margin="5" Text="Фамилия" HorizontalAlignment="Center" FontWeight="Bold" FontSize="14"/>
-        <TextBlock Grid.Row ="3" Grid.Column="1" Margin="5" Text="Имя" HorizontalAlignment="Center" FontWeight="Bold" FontSize="14"/>
-        <TextBlock Grid.Row ="3" Grid.Column="2" Margin="5" Text="Отчество" HorizontalAlignment="Center" FontWeight="Bold" FontSize="14"/>
-        <TextBlock Grid.Row ="3" Grid.Column="3" Margin="5" Text="Номер телефона" HorizontalAlignment="Center" FontWeight="Bold" FontSize="14"/>
-        <TextBlock Grid.Row ="3" Grid.Column="4" Margin="5" Text="Номер паспорта" HorizontalAlignment="Center" FontWeight="Bold" FontSize="14"/>
-        <TextBox x:Name="Surname" Grid.Row ="4" Grid.Column="0" Margin="10,5,5,5" Text="{Binding SelectedItem.Surname, ElementName=ListView_Clints}" />
-        <TextBox x:Name="Name" Grid.Row ="4" Grid.Column="1" Margin="5" Text="{Binding SelectedItem.Name, ElementName=ListView_Clints}"/>
-        <TextBox x:Name="Patronymic" Grid.Row ="4" Grid.Column="2" Margin="5" Text="{Binding SelectedItem.Patronymic, ElementName=ListView_Clints}"/>
-        <TextBox x:Name="PhoneNumber" Grid.Row ="4" Grid.Column="3" Margin="5" Text="{Binding SelectedItem.PhoneNumber, ElementName=ListView_Clints}"/>
-        <TextBox x:Name="PassNumber" Grid.Row ="4" Grid.Column="4" Margin="5,5,10,5" Text="{Binding SelectedItem.PassNumber, ElementName=ListView_Clints}"/>
-        <Button x:Name="BTN_Add" Grid.Row="5" Grid.Column="2" Margin="5" Content="Добавить" FontSize="14" Click="BTN_Add_Click"/>
-        <Button x:Name="BTN_Change" Grid.Row="5" Grid.Column="3" Margin="5" Content="Изменить" FontSize="14" Click="BTN_Change_Click"/>
-        <Button x:Name="BTN_Delete" Grid.Row="5" Grid.Column="4" Margin="5,5,10,5" Content="Удалить" FontSize="14" Click="BTN_Delete_Click"/>
+        <TextBlock Grid.Row ="4" Grid.Column="0" Margin="5" Text="Имя" HorizontalAlignment="Center" FontWeight="Bold" FontSize="14"/>
+        <TextBlock Grid.Row ="5" Grid.Column="0" Margin="5" Text="Отчество" HorizontalAlignment="Center" FontWeight="Bold" FontSize="14"/>
+        <TextBlock Grid.Row ="6" Grid.Column="0" Margin="5" Text="Номер телефона" HorizontalAlignment="Center" FontWeight="Bold" FontSize="14"/>
+        <TextBlock Grid.Row ="7" Grid.Column="0" Margin="5" Text="Номер паспорта" HorizontalAlignment="Center" FontWeight="Bold" FontSize="14"/>
+        <TextBox x:Name="Surname" Grid.Row ="3" Grid.Column="1" Margin="5"/> <!--Text="{Binding SelectedItem.Surname, ElementName=ListView_Clients}" />-->
+        <TextBox x:Name="Name" Grid.Row ="4" Grid.Column="1" Margin="5"/> <!--Text="{Binding SelectedItem.Name, ElementName=ListView_Clients}"/>-->
+        <TextBox x:Name="Patronymic" Grid.Row ="5" Grid.Column="1" Margin="5"/> <!--Text="{Binding SelectedItem.Patronymic, ElementName=ListView_Clients}"/>-->
+        <TextBox x:Name="PhoneNumber" Grid.Row ="6" Grid.Column="1" Margin="5"/> <!--Text="{Binding SelectedItem.PhoneNumber, ElementName=ListView_Clients}"/>-->
+        <TextBox x:Name="PassNumber" Grid.Row ="7" Grid.Column="1" Margin="5"/> <!--Text="{Binding SelectedItem.PassNumber, ElementName=ListView_Clients}"/>-->
+        <Button x:Name="BTN_Add" Grid.Row="4" Grid.Column="2" Margin="5" Content="Добавить" FontSize="14" Click="BTN_Add_Click"/>
+        <Button x:Name="BTN_Change" Grid.Row="5" Grid.Column="2" Margin="5" Content="Изменить" IsEnabled="{Binding IsSelectedItem, ElementName=ListView_Clients}" FontSize="14" Click="BTN_Change_Click"/>
+        <Button x:Name="BTN_Delete" Grid.Row="6" Grid.Column="2" Margin="5" Content="Удалить" FontSize="14" Click="BTN_Delete_Click"/>
+        <Button x:Name="BTN_Auth" Grid.Row="7" Grid.Column="4" Margin="5,5,10,5" Content="Авторизация" FontSize="14" Click="BTN_Auth_Click"/>
+
 
     </Grid>
 </Window>

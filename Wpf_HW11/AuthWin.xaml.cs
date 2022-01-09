@@ -31,13 +31,13 @@ namespace Wpf_HW11
             string tempName = TB_UserName.Text;
             UserController userController = new UserController(tempName);
             if (userController.IsNewUser) { MessageBox.Show("Вы новый пользователь\nваш статус - консультант\nдля изменения обратитесь к Администратору\nили войдите под Admin"); }
-            if(userController.clients.Count == 0) 
+            if(userController.Clients.Count == 0) 
             { 
                 var result = MessageBox.Show("Список клиентов пуст, заволнить автоматически?", "???", MessageBoxButton.YesNo); 
                 if(result == MessageBoxResult.Yes)
                 {
-                    userController.clients = new ClientController(15).Clients;
-                    userController.clientController.Clients = userController.clients;
+                    userController.ClientAutofill(15);
+                    //userController.clientController.Clients = userController.clients;
                 }
             }
 

@@ -24,7 +24,9 @@ namespace Wpf_HW11
     {
         private UserController userController;
         private Client selectedClient;
-        
+        public Client client;
+
+
 
         public MainWindow(UserController userController)
         {
@@ -34,17 +36,20 @@ namespace Wpf_HW11
             TB_User.Text = $"Пользователь: {userController.CurentUser.Name}";
             TB_UserStatus.Text = $"Статус: {userController.CurentUser.Status}";           
             
-            ListView_Clints.ItemsSource = this.userController.clients;
+            ListView_Clients.ItemsSource = this.userController.Clients;
             
             Surname.IsEnabled = userController.CurentUser is Consultant ? false : true;
             Name.IsEnabled = userController.CurentUser is Consultant ? false : true;
             Patronymic.IsEnabled = userController.CurentUser is Consultant ? false : true;
             PassNumber.IsEnabled = userController.CurentUser is Consultant ? false : true;
             BTN_Add.IsEnabled = userController.CurentUser is Consultant ? false : true;
-            BTN_Delete.IsEnabled = userController.CurentUser is Consultant ? false : true;
+            BTN_Delete.IsEnabled = false;
+            BTN_Change.IsEnabled = false;
         }
 
         
+
+
 
         private void BTN_Change_Click(object sender, RoutedEventArgs e)
         {
@@ -55,7 +60,7 @@ namespace Wpf_HW11
             var tempPhoneNumber = PhoneNumber.Text.Trim();
             var tempPassNumber = PassNumber.Text.Trim();
 
-            if (ListView_Clints.SelectedItem == null)
+            if (ListView_Clients.SelectedItem == null)
             {
                 MessageBox.Show("Не выбран клиетн!");
 
@@ -69,11 +74,12 @@ namespace Wpf_HW11
             {
                 PhoneNumber.ToolTip = "";
                 PhoneNumber.Background = Brushes.Transparent;
-                selectedClient = ListView_Clints.SelectedItem as Client;
+                selectedClient = ListView_Clients.SelectedItem as Client;
                 userController.UpdateClient(tempSurname, tempName, tempPatronymic, tempPhoneNumber, tempPassNumber, selectedClient);
-                ListView_Clints.Items.Refresh();
+                ListView_Clients.Items.Refresh();
                 
             }
+            BTN_Change.IsEnabled = false;
 
         }
 
@@ -85,13 +91,48 @@ namespace Wpf_HW11
             var tempPhoneNumber = PhoneNumber.Text.Trim();
             var tempPassNumber = PassNumber.Text.Trim();
             bool result = userController.AddClient(tempSurname, tempName, tempPatronymic, tempPhoneNumber, tempPassNumber);
-            ListView_Clints.Items.Refresh();
+            ListView_Clients.Items.Refresh();
         }
 
         private void BTN_Delete_Click(object sender, RoutedEventArgs e)
         {
-            userController.DeleteClient(ListView_Clints.SelectedItem as Client);
-            ListView_Clints.Items.Refresh();
+            userController.DeleteClient(ListView_Clients.SelectedItem as Client);
+            ListView_Clients.Items.Refresh();
+            BTN_Delete.IsEnabled = false;
         }
+
+
+        private void BTN_Auth_Click(object sender, RoutedEventArgs e)
+        {
+            AuthWin authWin = new();
+            authWin.Show();
+            this.Close();
+        }
+
+        
+        private void ListView_Clients_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+            var item = ListView_Clients.SelectedItem as Client;
+            if (item != null)
+            {
+                Surname.Text = item.Surname;
+                Name.Text = item.Name;
+                Patronymic.Text = item.Patronymic;
+                PhoneNumber.Text = item.PhoneNumber;
+                PassNumber.Text = item.PassNumber;
+            }
+            else
+            {
+                Surname.Text = "";
+                Name.Text = "";
+                Patronymic.Text = "";
+                PhoneNumber.Text = "";
+                PassNumber.Text = "";
+            }
+            BTN_Change.IsEnabled = true;
+            BTN_Delete.IsEnabled = userController.CurentUser is Consultant ? false : true;
+        }
+
+        
     }
 }

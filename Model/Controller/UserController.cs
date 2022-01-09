@@ -15,6 +15,7 @@ namespace HW11.BL.Controller
     {
 
         private static readonly string USER_FILE_NAME = "users.json";
+        private static readonly string CLIENT_FILE_NAME = "clients.json";
         /// <summary>
         /// Коллекция пользователей
         /// </summary>
@@ -27,13 +28,10 @@ namespace HW11.BL.Controller
         /// Новый ли пользователь?
         /// </summary>
         public bool IsNewUser { get; } = false;
-
-        public ClientController clientController;
-
-        public List<Client> clients;
-
-
-        
+        /// <summary>
+        /// Список клиентов
+        /// </summary>
+        public List<Client> Clients { get; set; }        
 
         /// <summary>
         /// Конструктор
@@ -41,7 +39,7 @@ namespace HW11.BL.Controller
         /// <param name="userName">имя пользователя</param>
         public UserController(string userName)
         {
-            this.Users = Load();
+            this.Users = LoadUser();
 
             CurentUser = Users.SingleOrDefault(u => u.Name == userName);
             if(CurentUser == null)
@@ -51,11 +49,25 @@ namespace HW11.BL.Controller
                 IsNewUser = true;
                 Save();
             }
-            clientController = new ClientController();
-            clients = GetAllClient();
+            Clients = LoadClients();            
         }
-              
         
+        /// <summary>
+        /// Автозаполнение клиентов для теста
+        /// </summary>
+        /// <param name="number"></param>
+        public void ClientAutofill(int number)
+        {
+            Clients = new List<Client>();
+            for (int i = 0; i < number; i++)
+            {
+                string tempGuid = Guid.NewGuid().ToString();
+                string[] stringMassive = tempGuid.Split(new char[] { '-' });
+
+                Clients.Add(new Client(stringMassive[0], stringMassive[1], stringMassive[2], stringMassive[3], stringMassive[4]));
+            }
+            Save();
+        }
 
         /// <summary>
         /// Метод смены типа консультанта на клиента
@@ -97,7 +109,7 @@ namespace HW11.BL.Controller
         /// Получение списка всех пользователей
         /// </summary>
         /// <returns></returns>
-        private List<User> Load()
+        private List<User> LoadUser()
         {
             List<User> tempUsers = new List<User>();
             var loadData = Load<UserDeserilize>(USER_FILE_NAME);
@@ -124,14 +136,19 @@ namespace HW11.BL.Controller
             return tempUsers;
 
         }
+        private List<Client> LoadClients()
+        {
+            return Load<Client>(CLIENT_FILE_NAME);
+        }
 
         public bool AddClient(string tempSurname, string tempName, string tempPatronymic, string tempPhoneNumber, string tempPassNumber)
         {
             Client newClient = new Client(tempSurname, tempName, tempPatronymic, tempPhoneNumber, tempPassNumber);
-            var findItem = clientController.Clients.SingleOrDefault(i => i == newClient);
-            if (findItem == null) 
+            var findItem = Clients.Contains(newClient);
+            if (findItem == false) 
             { 
-                clientController.AddClient(newClient);
+                Clients.Add(newClient);
+                Save();
                 return true;
             }
             return false;
@@ -143,25 +160,33 @@ namespace HW11.BL.Controller
         private void Save()
         {
             base.Save<User>(USER_FILE_NAME, Users);
+            base.Save<Client>(CLIENT_FILE_NAME, Clients);
         }
 
         public List<Client> GetAllClient()
         {
-            return CurentUser.GetAllClient(clientController.Clients);
+            return CurentUser.GetAllClient(Clients);
         }
 
         public void UpdateClient(string surname, string name, string patronymic, string phoneNumber, string passNumber, Client client)
         {
             var newClient = CurentUser.UpdateClient(surname, name, patronymic, phoneNumber, passNumber, client);
-            clientController.UpdateClient(newClient, client);        
-
+            var index = Clients.IndexOf(client);
+            if (index != -1)
+            {
+                Clients[index] = newClient;
+                Save();
+            }
         }
 
         public bool DeleteClient(Client client)
         {
             if (CurentUser.DeleteClient(client) != null)
             {
-                clientController.DeleteClient(CurentUser.DeleteClient(client));
+
+                var index = Clients.IndexOf(client);
+                Clients.RemoveAt(index);
+                Save();
                 return true;
             }
             return false;

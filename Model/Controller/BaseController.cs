@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace HW11.BL.Controller
 {
+    /// <summary>
+    /// базовый контроллер, обеспечивает сериализацию и наоборт
+    /// </summary>
     public class BaseController
     {
         /// <summary>
