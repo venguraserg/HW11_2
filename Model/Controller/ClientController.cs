@@ -52,7 +52,15 @@ namespace HW11.BL.Controller
             return this.Clients[number - 1];
         }
 
-
+        public void UpdateClient(Client newClient, Client currentClient)
+        {
+            var index = Clients.IndexOf(currentClient);
+            if (index != -1)
+            {
+                Clients[index] = newClient;
+                Save();
+            }
+        }
 
 
         /// <summary>
@@ -72,6 +80,20 @@ namespace HW11.BL.Controller
             return Load<Client>(CLIENT_FILE_NAME);
         }
 
+        internal void DeleteClient(Client client)
+        {
+            if(client!= null)
+            {
+                var index = Clients.IndexOf(client);
+                Clients.RemoveAt(index);
+                Save();
+            }
+        }
 
+        internal void AddClient(Client newClient)
+        {
+            Clients.Add(newClient);
+            Save();
+        }
     }
 }

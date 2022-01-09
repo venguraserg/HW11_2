@@ -26,14 +26,19 @@ namespace HW11.BL.Model
 
         }
 
+        public override Client DeleteClient(Client client)
+        {
+            throw new NotImplementedException();
+        }
+
         public override List<Client> GetAllClient(List<Client> clients)
         {
             return clients;
         }
 
-        public override Client UpdateClient(Client client)
+        public override Client UpdateClient(string surname, string name, string patronymic, string phoneNumber, string passNumber, Client client)
         {
-            throw new NotImplementedException();
+            return client;
         }
     }
 }

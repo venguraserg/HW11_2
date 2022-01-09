@@ -19,12 +19,18 @@ namespace HW11.BL.Model
         /// <param name="status"></param>
         public UserDeserilize(Guid id, string name, string status) : base(id, name, status) { }
 
+        public override Client DeleteClient(Client client)
+        {
+            throw new NotImplementedException();
+        }
+
         public override List<Client> GetAllClient(List<Client> clients)
         {
             return null;
         }
 
-        public override Client UpdateClient(Client client)
+        
+        public override Client UpdateClient(string surname, string name, string patronymic, string phoneNumber, string passNumber, Client client)
         {
             throw new NotImplementedException();
         }

@@ -88,13 +88,13 @@ namespace Console_HW11
                     switch (key.Key)
                     {
                         case ConsoleKey.V:
-                            PrintUsers(userController.GetAllClient(clientController.Clients));
+                            PrintUsers(userController.GetAllClient());
                             Console.ReadKey();
                             break;
 
                         case ConsoleKey.C:
                             // изменения данных клиента
-                            PrintUsers(userController.GetAllClient(clientController.Clients));
+                            PrintUsers(userController.GetAllClient());
                             Console.WriteLine("--------------------------------------------------------------------");
                             Console.WriteLine("Введите номер клиента");
                             var clientNumber = int.Parse(Console.ReadLine());

@@ -19,7 +19,10 @@ namespace HW11.BL.Model
             
         }
 
-
+        public override Client DeleteClient(Client client)
+        {
+            return null;
+        }
 
         public override List<Client> GetAllClient(List<Client> clients)
         {
@@ -30,11 +33,9 @@ namespace HW11.BL.Model
             return clients;
         }
 
-        public override Client UpdateClient(Client client)
+        public override Client UpdateClient(string surname, string name, string patronymic, string phoneNumber, string passNumber, Client client)
         {
-            throw new NotImplementedException();
+            return new Client(client.Surname, client.Name, client.Patronymic, phoneNumber, client.PassNumber);
         }
-
-        
     }
 }

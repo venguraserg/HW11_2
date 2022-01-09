@@ -3,11 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31911.196
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HW11.BL", "Model\HW11.BL.csproj", "{40A169B3-83D7-4AD4-97C9-F7DF6D7F2EAD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HW11.BL", "Model\HW11.BL.csproj", "{40A169B3-83D7-4AD4-97C9-F7DF6D7F2EAD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Console_HW11", "Console_HW11\Console_HW11.csproj", "{9FE8179C-F2A0-4C4F-BAC7-D6D1643F6237}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wpf_HW11", "Wpf_HW11\Wpf_HW11.csproj", "{CF04F606-EAEF-4F63-AFAF-107BBC4A9B95}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wpf_HW11", "Wpf_HW11\Wpf_HW11.csproj", "{CF04F606-EAEF-4F63-AFAF-107BBC4A9B95}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +17,6 @@ Global
 		{40A169B3-83D7-4AD4-97C9-F7DF6D7F2EAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40A169B3-83D7-4AD4-97C9-F7DF6D7F2EAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40A169B3-83D7-4AD4-97C9-F7DF6D7F2EAD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9FE8179C-F2A0-4C4F-BAC7-D6D1643F6237}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9FE8179C-F2A0-4C4F-BAC7-D6D1643F6237}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9FE8179C-F2A0-4C4F-BAC7-D6D1643F6237}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9FE8179C-F2A0-4C4F-BAC7-D6D1643F6237}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CF04F606-EAEF-4F63-AFAF-107BBC4A9B95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CF04F606-EAEF-4F63-AFAF-107BBC4A9B95}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF04F606-EAEF-4F63-AFAF-107BBC4A9B95}.Release|Any CPU.ActiveCfg = Release|Any CPU

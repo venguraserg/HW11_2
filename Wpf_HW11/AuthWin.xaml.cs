@@ -30,7 +30,17 @@ namespace Wpf_HW11
         {
             string tempName = TB_UserName.Text;
             UserController userController = new UserController(tempName);
-            if (userController.IsNewUser) { MessageBox.Show("Вы новый пользователь\n ваш статус - консультант\nдля изменения обратитесь к Администратору"); }
+            if (userController.IsNewUser) { MessageBox.Show("Вы новый пользователь\nваш статус - консультант\nдля изменения обратитесь к Администратору\nили войдите под Admin"); }
+            if(userController.clients.Count == 0) 
+            { 
+                var result = MessageBox.Show("Список клиентов пуст, заволнить автоматически?", "???", MessageBoxButton.YesNo); 
+                if(result == MessageBoxResult.Yes)
+                {
+                    userController.clients = new ClientController(15).Clients;
+                    userController.clientController.Clients = userController.clients;
+                }
+            }
+
             if (userController.CurentUser is Administrator)
             {
                 var adminWindow = new AdminWindow(userController);
@@ -38,10 +48,29 @@ namespace Wpf_HW11
             }
             else
             {
+
                 var mainWindow = new MainWindow(userController);
                 mainWindow.Show();
+
+
+                //switch (userController.CurentUser.GetType().Name)
+                //{
+                //    case "Consultant":
+                //        //var consultWindow = new ConsultWindow(userController);
+                //        //consultWindow.Show();
+                //        var mainWindow = new MainWindow(userController);
+                //        mainWindow.Show();
+                //        break;
+
+                //    case "Manager":
+                //        /*var*/ mainWindow = new MainWindow(userController);
+                //        mainWindow.Show();
+                //        break;
+
+                //    default:
+                //        break;
+                //}
             }
-            
             this.Close();
         }
     }

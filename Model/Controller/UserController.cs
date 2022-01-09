@@ -1,6 +1,7 @@
 ﻿using HW11.BL.Interfaces;
 using HW11.BL.Model;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace HW11.BL.Controller
     /// <summary>
     /// Класс котроллера пользователя
     /// </summary>
-    public class UserController : BaseController 
+    public class UserController : BaseController
     {
 
         private static readonly string USER_FILE_NAME = "users.json";
@@ -26,6 +27,11 @@ namespace HW11.BL.Controller
         /// Новый ли пользователь?
         /// </summary>
         public bool IsNewUser { get; } = false;
+
+        public ClientController clientController;
+
+        public List<Client> clients;
+
 
         
 
@@ -45,9 +51,10 @@ namespace HW11.BL.Controller
                 IsNewUser = true;
                 Save();
             }
-            
+            clientController = new ClientController();
+            clients = GetAllClient();
         }
-
+              
         
 
         /// <summary>
@@ -118,6 +125,18 @@ namespace HW11.BL.Controller
 
         }
 
+        public bool AddClient(string tempSurname, string tempName, string tempPatronymic, string tempPhoneNumber, string tempPassNumber)
+        {
+            Client newClient = new Client(tempSurname, tempName, tempPatronymic, tempPhoneNumber, tempPassNumber);
+            var findItem = clientController.Clients.SingleOrDefault(i => i == newClient);
+            if (findItem == null) 
+            { 
+                clientController.AddClient(newClient);
+                return true;
+            }
+            return false;
+        }
+
         /// <summary>
         /// Серилизация пользователей в json файл
         /// </summary>
@@ -126,14 +145,27 @@ namespace HW11.BL.Controller
             base.Save<User>(USER_FILE_NAME, Users);
         }
 
-        public List<Client> GetAllClient(List<Client> clients)
+        public List<Client> GetAllClient()
         {
-            return CurentUser.GetAllClient(clients);
+            return CurentUser.GetAllClient(clientController.Clients);
         }
 
-        public Client UpdateClient()
+        public void UpdateClient(string surname, string name, string patronymic, string phoneNumber, string passNumber, Client client)
         {
-            throw new System.NotImplementedException();
+            var newClient = CurentUser.UpdateClient(surname, name, patronymic, phoneNumber, passNumber, client);
+            clientController.UpdateClient(newClient, client);        
+
+        }
+
+        public bool DeleteClient(Client client)
+        {
+            if (CurentUser.DeleteClient(client) != null)
+            {
+                clientController.DeleteClient(CurentUser.DeleteClient(client));
+                return true;
+            }
+            return false;
+            
         }
     }
 }

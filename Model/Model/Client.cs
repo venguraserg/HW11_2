@@ -14,6 +14,7 @@ namespace HW11.BL.Model
         public string PhoneNumber { get; set; }
         public string PassNumber { get; set; }
 
+        public Client() { }
 
         public Client(string surname, string name, string patronymic, string phoneNumber, string passNumber)
         {

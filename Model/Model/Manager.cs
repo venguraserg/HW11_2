@@ -19,15 +19,20 @@ namespace HW11.BL.Model
         {
 
         }
+
+        public override Client DeleteClient(Client client)
+        {
+            return client;
+        }
+
         public override List<Client> GetAllClient(List<Client> clients)
         {
             return clients;
         }
 
-        public override Client UpdateClient(Client client)
+        public override Client UpdateClient(string surname, string name, string patronymic, string phoneNumber, string passNumber, Client client)
         {
-            //null
-            return null;
+            return new Client(surname, name, patronymic, phoneNumber, passNumber);
         }
     }
 }

@@ -32,8 +32,8 @@ namespace HW11.BL.Model
 
         #region Методы
         public abstract List<Client> GetAllClient(List<Client> clients);
-        public abstract Client UpdateClient(Client client);
-
+        public abstract Client UpdateClient(string surname, string name, string patronymic, string phoneNumber, string passNumber, Client client);
+        public abstract Client DeleteClient(Client client);
 
 
         #endregion
@@ -43,7 +43,6 @@ namespace HW11.BL.Model
             return $"{Name}  {Status}";
         }
 
-
-
+       
     }
 }

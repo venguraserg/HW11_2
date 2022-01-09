@@ -22,7 +22,7 @@ namespace Wpf_HW11
     public partial class AdminWindow : Window
     {
         private UserController userController;
-        private string tempName;
+       
         public AdminWindow(UserController userController)
         {
             InitializeComponent();
@@ -33,9 +33,13 @@ namespace Wpf_HW11
 
         private void BTN_Change_Click(object sender, RoutedEventArgs e)
         {
-            userController.ChangeUserStatus(tempName);
-            
-            //ListView_Users.Items.Refresh();
+            var item = ListView_Users.SelectedItem as User;
+            if(item !=null)
+            {
+                userController.ChangeUserStatus(item.Name);                
+            }
+            ListView_Users.Items.Refresh();
+
         }
 
         private void BTN_Exit_Click(object sender, RoutedEventArgs e)
@@ -46,19 +50,5 @@ namespace Wpf_HW11
         }
 
         
-       
-        private void ListView_Users_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ListView_Users.Items.Refresh();
-            this.Title = ListView_Users.SelectedItem.ToString();
-            var item = ListView_Users.SelectedItem as User;
-            this.tempName = item.Name;
-            
-        }
-
-        private void ListBox_Users_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
     }
 }

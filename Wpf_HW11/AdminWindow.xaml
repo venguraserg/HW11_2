@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Wpf_HW11"
         mc:Ignorable="d"
-        Title="AdminWindow" Height="450" Width="400" ResizeMode="NoResize" WindowStyle="SingleBorderWindow">
+        Title="Список арльзователей" Height="450" Width="400" ResizeMode="NoResize" WindowStyle="SingleBorderWindow">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" ></ColumnDefinition>
@@ -14,14 +14,18 @@
             <ColumnDefinition ></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="45*"></RowDefinition>            
-            <RowDefinition Height="45*"></RowDefinition>
+            <RowDefinition Height="90*"></RowDefinition>
             <RowDefinition Height="10*"></RowDefinition>
             
         </Grid.RowDefinitions>
-        <ListBox x:Name="ListBox_Users" Grid.Row="0" Margin="10" Grid.ColumnSpan="4" SelectionChanged="ListBox_Users_SelectionChanged" />
-        <ListView x:Name="ListView_Users" Grid.Row="1" Margin="10" Grid.ColumnSpan="4" SelectionChanged="ListView_Users_SelectionChanged" >
-            <ListView.ItemTemplate>
+        <ListView x:Name="ListView_Users" Grid.Row="0" Margin="10" Grid.ColumnSpan="4"  >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Имя" Width="120"  DisplayMemberBinding="{Binding Path=Name}"></GridViewColumn>
+                    <GridViewColumn Header="Статус" DisplayMemberBinding="{Binding Path=Status}"></GridViewColumn>
+                </GridView>
+            </ListView.View>
+            <!--<ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel>
                         <TextBlock Text="Имя: " />
@@ -32,7 +36,7 @@
                         
                     </WrapPanel>
                 </DataTemplate>
-            </ListView.ItemTemplate>
+            </ListView.ItemTemplate>-->
         </ListView>
         
         <Button x:Name="BTN_Change" Grid.Column="2" Grid.Row="2" Margin="10,10" Content="Изменить" Click="BTN_Change_Click"/>
