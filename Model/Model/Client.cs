@@ -8,6 +8,7 @@ namespace HW11.BL.Model
 {
     public class Client
     {
+        Guid Id { get; set; }
         public string Surname { get; set; }
         public string Name { get; set; }
         public string Patronymic { get; set; }
@@ -16,15 +17,24 @@ namespace HW11.BL.Model
 
         public Client() { }
 
-        public Client(string surname, string name, string patronymic, string phoneNumber, string passNumber)
+        public Client(Guid id, string surname, string name, string patronymic, string phoneNumber, string passNumber)
         {
+            Id = id;
             Surname = surname;
             Name = name;
             Patronymic = patronymic;
             PhoneNumber = phoneNumber;
             PassNumber = passNumber;
         }
-        
-                
+        public Client(string surname, string name, string patronymic, string phoneNumber, string passNumber)
+        {
+            Id = Guid.NewGuid();
+            Surname = surname;
+            Name = name;
+            Patronymic = patronymic;
+            PhoneNumber = phoneNumber;
+            PassNumber = passNumber;
+        }
+
     }
 }

@@ -13,7 +13,7 @@ namespace HW11.BL.Controller
     /// </summary>
     public class UserController : BaseController
     {
-
+        // приватные поля для определения пути файлов хранения данных
         private static readonly string USER_FILE_NAME = "users.json";
         private static readonly string CLIENT_FILE_NAME = "clients.json";
         /// <summary>
@@ -31,7 +31,19 @@ namespace HW11.BL.Controller
         /// <summary>
         /// Список клиентов
         /// </summary>
-        public List<Client> Clients { get; set; }        
+        private List<Client> clients;
+        public List<Client> Clients 
+        {
+            get 
+            {                 
+                return CurentUser.GetAllClient(clients); 
+            }
+            set 
+            { 
+                clients = value; 
+            }
+               
+         }        
 
         /// <summary>
         /// Конструктор
@@ -47,9 +59,10 @@ namespace HW11.BL.Controller
                 CurentUser = new Consultant(userName);
                 Users.Add((User)CurentUser);
                 IsNewUser = true;
-                Save();
+                
             }
-            Clients = LoadClients();            
+            clients = LoadClients();
+            Save();
         }
         
         /// <summary>
@@ -58,13 +71,13 @@ namespace HW11.BL.Controller
         /// <param name="number"></param>
         public void ClientAutofill(int number)
         {
-            Clients = new List<Client>();
+            clients = new List<Client>();
             for (int i = 0; i < number; i++)
             {
                 string tempGuid = Guid.NewGuid().ToString();
                 string[] stringMassive = tempGuid.Split(new char[] { '-' });
 
-                Clients.Add(new Client(stringMassive[0], stringMassive[1], stringMassive[2], stringMassive[3], stringMassive[4]));
+                clients.Add(new Client(Guid.NewGuid(), stringMassive[0], stringMassive[1], stringMassive[2], stringMassive[3], stringMassive[4])); ;
             }
             Save();
         }
@@ -106,7 +119,7 @@ namespace HW11.BL.Controller
 
 
         /// <summary>
-        /// Получение списка всех пользователей
+        /// Получение списка всех пользователей из файла
         /// </summary>
         /// <returns></returns>
         private List<User> LoadUser()
@@ -136,18 +149,31 @@ namespace HW11.BL.Controller
             return tempUsers;
 
         }
+        /// <summary>
+        /// Получение списка всех клиентов из файла
+        /// </summary>
+        /// <returns></returns>
         private List<Client> LoadClients()
         {
             return Load<Client>(CLIENT_FILE_NAME);
         }
-
+        
+        /// <summary>
+        /// Добавление клиента
+        /// </summary>
+        /// <param name="tempSurname"></param>
+        /// <param name="tempName"></param>
+        /// <param name="tempPatronymic"></param>
+        /// <param name="tempPhoneNumber"></param>
+        /// <param name="tempPassNumber"></param>
+        /// <returns></returns>
         public bool AddClient(string tempSurname, string tempName, string tempPatronymic, string tempPhoneNumber, string tempPassNumber)
         {
             Client newClient = new Client(tempSurname, tempName, tempPatronymic, tempPhoneNumber, tempPassNumber);
-            var findItem = Clients.Contains(newClient);
+            var findItem = clients.Contains(newClient);
             if (findItem == false) 
             { 
-                Clients.Add(newClient);
+                clients.Add(newClient);
                 Save();
                 return true;
             }
@@ -160,32 +186,41 @@ namespace HW11.BL.Controller
         private void Save()
         {
             base.Save<User>(USER_FILE_NAME, Users);
-            base.Save<Client>(CLIENT_FILE_NAME, Clients);
+            base.Save<Client>(CLIENT_FILE_NAME, clients);
         }
 
-        public List<Client> GetAllClient()
-        {
-            return CurentUser.GetAllClient(Clients);
-        }
-
+        /// <summary>
+        /// Обновление клиента
+        /// </summary>
+        /// <param name="surname"></param>
+        /// <param name="name"></param>
+        /// <param name="patronymic"></param>
+        /// <param name="phoneNumber"></param>
+        /// <param name="passNumber"></param>
+        /// <param name="client"></param>
         public void UpdateClient(string surname, string name, string patronymic, string phoneNumber, string passNumber, Client client)
         {
             var newClient = CurentUser.UpdateClient(surname, name, patronymic, phoneNumber, passNumber, client);
-            var index = Clients.IndexOf(client);
+            var index = clients.IndexOf(client);
             if (index != -1)
             {
-                Clients[index] = newClient;
+                clients[index] = newClient;
                 Save();
             }
         }
 
+        /// <summary>
+        /// удаление клиента
+        /// </summary>
+        /// <param name="client"></param>
+        /// <returns></returns>
         public bool DeleteClient(Client client)
         {
             if (CurentUser.DeleteClient(client) != null)
             {
 
-                var index = Clients.IndexOf(client);
-                Clients.RemoveAt(index);
+                var index = clients.IndexOf(client);
+                clients.RemoveAt(index);
                 Save();
                 return true;
             }

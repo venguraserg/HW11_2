@@ -24,7 +24,8 @@ namespace Wpf_HW11
     {
         private UserController userController;
         private Client selectedClient;
-        public Client client;
+        
+        //public Client client;
 
 
 
@@ -46,7 +47,7 @@ namespace Wpf_HW11
             BTN_Delete.IsEnabled = false;
             BTN_Change.IsEnabled = false;
         }
-
+        
         
 
 
@@ -79,7 +80,7 @@ namespace Wpf_HW11
                 ListView_Clients.Items.Refresh();
                 
             }
-            BTN_Change.IsEnabled = false;
+           
 
         }
 
@@ -98,7 +99,7 @@ namespace Wpf_HW11
         {
             userController.DeleteClient(ListView_Clients.SelectedItem as Client);
             ListView_Clients.Items.Refresh();
-            BTN_Delete.IsEnabled = false;
+            
         }
 
 
@@ -129,8 +130,17 @@ namespace Wpf_HW11
                 PhoneNumber.Text = "";
                 PassNumber.Text = "";
             }
-            BTN_Change.IsEnabled = true;
-            BTN_Delete.IsEnabled = userController.CurentUser is Consultant ? false : true;
+            if (ListView_Clients.SelectedItems.Count > 0)
+            {
+                BTN_Change.IsEnabled = true;
+                BTN_Delete.IsEnabled = userController.CurentUser is Consultant ? false : true;
+            }
+            else
+            {
+                BTN_Change.IsEnabled = false;
+                BTN_Delete.IsEnabled = false;
+            }
+           
         }
 
         
